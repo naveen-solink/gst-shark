@@ -40,7 +40,7 @@ then
     ln -s ../../common/hooks/pre-commit.hook .git/hooks/pre-commit
 fi
 
-CONFIGURE_DEF_OPT='--enable-maintainer-mode --enable-gtk-doc'
+CONFIGURE_DEF_OPT='--enable-maintainer-mode'
 
 autogen_options $@
 
