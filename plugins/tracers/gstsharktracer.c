@@ -406,10 +406,14 @@ gst_shark_tracer_hook_pad_push_pre (GObject * object, GstClockTime ts,
   GstSharkTracerPrivate *priv = GST_SHARK_TRACER_PRIVATE (self);
   GCallback hook;
   const gchar *elname;
+  GstObject *parent;
 
-  elname = GST_OBJECT_NAME (GST_OBJECT_PARENT (pad));
-  if (FALSE == gst_shark_tracer_element_is_filtered (self, elname)) {
-    return;
+  parent = GST_OBJECT_PARENT (pad);
+  if (parent) {
+    elname = GST_OBJECT_NAME (parent);
+    if (FALSE == gst_shark_tracer_element_is_filtered (self, elname)) {
+      return;
+    }
   }
 
   hook = g_hash_table_lookup (priv->hooks, "pad-push-pre");
